@@ -1,0 +1,15 @@
+Step 1 Install Rubik.
+Run the following command on all Kubernetes nodes:
+sudo yum install -y rubik
+Step 2 Enable the QoS function.
+Run the following command on all Kubernetes nodes:
+sudo echo 1 > /proc/sys/vm/memcg_qos_enable
+Step 3 Create a Rubik image.
+Run the following command on all Kubernetes nodes:
+cd /var/lib/rubik
+docker build -f /var/lib/rubik/Dockerfile -t rubik:0.1.0-2 .
+Step 4 Deploy Rubik.
+Run the following command on the k8smaster1 node to deploy Rubik:
+kubectl apply -f /var/lib/rubik/rubik-daemonset.yaml
+View Rubik.
+kebectl get pods -A | grep rubik
